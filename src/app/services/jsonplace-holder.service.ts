@@ -7,11 +7,20 @@ import { Observable } from 'rxjs';
 })
 export class JSONPlaceHolderService {
 
+  url ="https://jsonplaceholder.typicode.com";
+
   constructor(private http: HttpClient) { }
 
-  getData(): Observable<any> {
-    const url = "https://jsonplaceholder.typicode.com/posts";
+  getPosts(): Observable<any> {
+    return this.http.get<any>(this.url + "/posts");
+  } 
 
-    return this.http.get<any>(url);
-  }
+  getPhotos(): Observable<any> {
+    return this.http.get<any>(this.url + "/photos");
+  } 
+
+  getUsers(): Observable<any> {
+    return this.http.get<any>(this.url + "/users");
+  } 
+
 }

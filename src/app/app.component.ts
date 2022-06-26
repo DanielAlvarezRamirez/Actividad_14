@@ -13,8 +13,22 @@ export class AppComponent {
     this.data = new Array<any>();
   }
 
-  getDataFromAPI(){
-    this.JSONPlaceHolder.getData().subscribe((data) => {
+  getPostsFromAPI(){
+    this.JSONPlaceHolder.getPosts().subscribe((data) => {
+      console.log(data);
+      this.data = data;
+    })
+  }
+
+  getPhotosFromAPI(){
+    this.JSONPlaceHolder.getPhotos().subscribe((data) => {
+      console.log(data);
+      this.data = data;
+    })
+  }
+
+  getUsersFromAPI(){
+    this.JSONPlaceHolder.getUsers().subscribe((data) => {
       console.log(data);
       this.data = data;
     })
