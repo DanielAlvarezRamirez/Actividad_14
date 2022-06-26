@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { JSONPlaceHolderService } from './services/jsonplace-holder.service'; 
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Actividad_14';
+  data: Array<any>;
+
+  constructor(private JSONPlaceHolder:JSONPlaceHolderService){
+    this.data = new Array<any>();
+  }
+
+  getDataFromAPI(){
+    this.JSONPlaceHolder.getData().subscribe((data) => {
+      console.log(data);
+      this.data = data;
+    })
+  }
 }
