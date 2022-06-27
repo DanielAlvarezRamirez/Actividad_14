@@ -1,10 +1,26 @@
-<button (click)="getPostsFromAPI()">Mostrar Posts</button>
-<button (click)="getPhotosFromAPI()">Mostrar Fotos</button>
-<button (click)="getUsersFromAPI()">Mostrar Usuarios</button>
+<button mat-raised-button color="primary" (click)="getPostsFromAPI()">Mostrar Posts</button>
+<button mat-raised-button color="primary" (click)="getPhotosFromAPI()">Mostrar Fotos</button>
+<button mat-raised-button color="primary" (click)="getUsersFromAPI()">Mostrar Usuarios</button>
 
+<div *ngIf="isPosts">
+  <ul *ngFor="let d of data">
+    <li>{{d.title}}</li>
+    <li>{{d.body}}</li>
+  </ul>
+</div>
 
-<!-- <ul *ngFor="let d of data">
-  <li>{{d.id}}</li>
-  <li>{{d.title}}</li>
-  <li>{{d.body}}</li>
-</ul> -->
+<div *ngIf="isPhotos">
+  <ul *ngFor="let d of data">
+    <li>{{d.title}}</li>
+    <img src="{{d.thumbnailUrl}}">
+  </ul>
+</div>
+
+<div *ngIf="isUsers">
+  <ul *ngFor="let d of data">
+    <li>Name: {{d.name}}</li>
+    <li>Username: {{d.username}}</li>
+    <li>Email: {{d.email}}</li>
+    <li>Website: {{d.website}}</li>
+  </ul>
+</div>
