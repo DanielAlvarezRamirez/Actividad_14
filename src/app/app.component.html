@@ -1,9 +1,13 @@
-<button mat-raised-button color="primary" (click)="changeSelected('posts')">Mostrar Posts</button>
-<button mat-raised-button color="primary" (click)="changeSelected('photos')">Mostrar Fotos</button>
-<button mat-raised-button color="primary" (click)="changeSelected('users')">Mostrar Usuarios</button>
+<div class="selector-buttons">
+  <button mat-raised-button color="primary" (click)="changeSelected('posts')">Mostrar Posts</button>
+  <button mat-raised-button color="primary" (click)="changeSelected('photos')">Mostrar Fotos</button>
+  <button mat-raised-button color="primary" (click)="changeSelected('users')">Mostrar Usuarios</button>
+</div>
+
+<button mat-raised-button color="" (click)="openDialog()">Pick one</button>
 
 <div *ngIf="isPosts" class="mat-elevation-z8">
-  <table mat-table [dataSource]="postsDataSource">
+  <table class="table-container" mat-table [dataSource]="postsDataSource">
 
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef> Title </th>
@@ -14,6 +18,15 @@
       <th mat-header-cell *matHeaderCellDef> Body </th>
       <td mat-cell *matCellDef="let element"> {{element.body}} </td>
     </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td class="buttons-container" mat-cell *matCellDef="let element"> 
+        <button mat-raised-button color="accent" >Edit</button>
+        <button mat-raised-button color="warn" (click)="deletePost(element.id)">Delete</button>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="postsDisplayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: postsDisplayedColumns;"></tr>
   </table>
@@ -24,7 +37,7 @@
 </div>
 
 <div *ngIf="isPhotos" class="mat-elevation-z8">
-  <table mat-table [dataSource]="photosDataSource">
+  <table class="table-container" mat-table [dataSource]="photosDataSource">
 
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef> Title </th>
@@ -43,11 +56,12 @@
 
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
-      <td mat-cell *matCellDef="let element"> 
-        <button mat-raised-button color="accent" (click)="changeSelected('posts')">Edit</button>
-        <button mat-raised-button color="warn" (click)="changeSelected('posts')">Delete</button>
+      <td class="buttons-container" mat-cell *matCellDef="let element"> 
+        <button mat-raised-button color="accent">Edit</button>
+        <button mat-raised-button color="warn">Delete</button>
       </td>
     </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="photosDisplayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: photosDisplayedColumns;"></tr>
   </table>
@@ -58,7 +72,7 @@
 </div>
 
 <div *ngIf="isUsers" class="mat-elevation-z8">
-  <table mat-table [dataSource]="usersDataSource">
+  <table class="table-container"  mat-table [dataSource]="usersDataSource">
 
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -84,6 +98,15 @@
       <th mat-header-cell *matHeaderCellDef> Website </th>
       <td mat-cell *matCellDef="let element"> {{element.website}} </td>
     </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td class="buttons-container" mat-cell *matCellDef="let element"> 
+        <button mat-raised-button color="accent">Edit</button>
+        <button mat-raised-button color="warn">Delete</button>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="usersDisplayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: usersDisplayedColumns;"></tr>
   </table>

@@ -1,8 +1,21 @@
 button {
-  margin: 20px;
+  margin: 10px 20px;
+}
+
+.selector-buttons {
+  margin-right: 50px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
 }
 
 img {
   height: 50px;
   width: 50px;
+}
+
+.table-container {
+  width: 100%;
 }
