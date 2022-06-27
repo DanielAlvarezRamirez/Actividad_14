@@ -22,7 +22,7 @@ export class AppComponent implements OnInit{
 
   postsDisplayedColumns: string[] = ['title', 'body'];
   photosDisplayedColumns: string[] = ['title', 'url', 'thumbnailUrl'];
-  usersDisplayedColumns: string[] = ['name', 'username', 'email', 'website'];
+  usersDisplayedColumns: string[] = ['name', 'username', 'email', 'phone', 'website'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -39,10 +39,11 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.getPostsFromAPI();
+    this.getPhotosFromAPI();
+    this.getUsersFromAPI();
   }
 
   getPostsFromAPI(){
-    this.changeSelected('posts');
     this.JSONPlaceHolder.getPosts().subscribe((data) => {
       console.log(data);
       this.data = data;
@@ -51,7 +52,6 @@ export class AppComponent implements OnInit{
   }
 
   getPhotosFromAPI(){
-    this.changeSelected('photos');
     this.JSONPlaceHolder.getPhotos().subscribe((data) => {
       console.log(data);
       this.data = data;
@@ -60,7 +60,6 @@ export class AppComponent implements OnInit{
   }
 
   getUsersFromAPI(){
-    this.changeSelected('users');
     this.JSONPlaceHolder.getUsers().subscribe((data) => {
       console.log(data);
       this.data = data;
@@ -70,14 +69,17 @@ export class AppComponent implements OnInit{
 
   changeSelected(selectedResource : string): void{
     if(selectedResource === 'posts'){
+      this.postsDataSource.paginator = this.paginator;
       this.isPosts = true;
       this.isPhotos = false;
       this.isUsers = false;
     } else if(selectedResource === 'photos') {
+      this.photosDataSource.paginator = this.paginator;
       this.isPosts = false;
       this.isPhotos = true;
       this.isUsers = false;
     } else if(selectedResource === 'users'){
+      this.usersDataSource.paginator = this.paginator;
       this.isPosts = false;
       this.isPhotos = false;
       this.isUsers = true;
@@ -98,5 +100,6 @@ interface User {
   name: string,
   username: string,
   email: string,
+  phone: string,
   website: string,
 }
