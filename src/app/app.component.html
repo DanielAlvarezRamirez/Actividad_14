@@ -2,25 +2,80 @@
 <button mat-raised-button color="primary" (click)="getPhotosFromAPI()">Mostrar Fotos</button>
 <button mat-raised-button color="primary" (click)="getUsersFromAPI()">Mostrar Usuarios</button>
 
-<div *ngIf="isPosts">
-  <ul *ngFor="let d of data">
-    <li>{{d.title}}</li>
-    <li>{{d.body}}</li>
-  </ul>
+<div *ngIf="isPosts" class="mat-elevation-z8">
+  <table mat-table [dataSource]="postsDataSource">
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> Title </th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="body">
+      <th mat-header-cell *matHeaderCellDef> Body </th>
+      <td mat-cell *matCellDef="let element"> {{element.body}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="postsDisplayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: postsDisplayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 20]"
+                 showFirstLastButtons>
+  </mat-paginator>
 </div>
 
-<div *ngIf="isPhotos">
-  <ul *ngFor="let d of data">
-    <li>{{d.title}}</li>
-    <img src="{{d.thumbnailUrl}}">
-  </ul>
+<div *ngIf="isPhotos" class="mat-elevation-z8">
+  <table mat-table [dataSource]="photosDataSource">
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> Title </th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="url">
+      <th mat-header-cell *matHeaderCellDef> URL </th>
+      <td mat-cell *matCellDef="let element"> {{element.url}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="thumbnailUrl">
+      <th mat-header-cell *matHeaderCellDef> Thumbnail </th>
+      <td mat-cell *matCellDef="let element"> <img src={{element.thumbnailUrl}}> </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="photosDisplayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: photosDisplayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 20]"
+                 showFirstLastButtons>
+  </mat-paginator>
 </div>
 
-<div *ngIf="isUsers">
-  <ul *ngFor="let d of data">
-    <li>Name: {{d.name}}</li>
-    <li>Username: {{d.username}}</li>
-    <li>Email: {{d.email}}</li>
-    <li>Website: {{d.website}}</li>
-  </ul>
+<div *ngIf="isUsers" class="mat-elevation-z8">
+  <table mat-table [dataSource]="usersDataSource">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef> Username </th>
+      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="website">
+      <th mat-header-cell *matHeaderCellDef> Website </th>
+      <td mat-cell *matCellDef="let element"> {{element.website}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="usersDisplayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: usersDisplayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 20]"
+                 showFirstLastButtons>
+  </mat-paginator>
 </div>
