@@ -21,7 +21,7 @@ export class AppComponent implements OnInit{
   usersDataSource = new MatTableDataSource<User>();
 
   postsDisplayedColumns: string[] = ['title', 'body'];
-  photosDisplayedColumns: string[] = ['title', 'url', 'thumbnailUrl'];
+  photosDisplayedColumns: string[] = ['title', 'url', 'thumbnailUrl', 'actions'];
   usersDisplayedColumns: string[] = ['name', 'username', 'email', 'phone', 'website'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
