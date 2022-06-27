@@ -35,7 +35,26 @@ export class JSONPlaceHolderService {
         'Content-type': 'application/json; charset=UTF-8',
       }
     })
-    .then((json) => alert(json));
+    .then((response) => response.json())
+    .then((json) => alert("Title: " + json.title + "\nBody: " + json.body));
+  }
+
+  editPost(id: string, title: string, body: string){
+    console.log(this.url + "/posts/" + id);
+    fetch(this.url + "/posts/" + id, {
+      method: 'PUT',
+      body: JSON.stringify({
+        id: id,
+        title: title,
+        body: body,
+        userId: id,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      }
+    })
+    .then((response) => response.json())
+    .then((json) => alert("UserId: " + json.userId + "\nTitle: " + json.title + "\nBody: " + json.body));
   }
 
   deletePost(id: string) {

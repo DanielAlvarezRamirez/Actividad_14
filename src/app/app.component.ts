@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { JSONPlaceHolderService } from './services/jsonplace-holder.service'; 
-import {AfterViewInit, ViewChild} from '@angular/core';
+import { ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -14,13 +15,14 @@ export class AppComponent implements OnInit{
   isPhotos: boolean = false;
   isUsers: boolean = false;
 
+
   //-------------- Table configuration---------------------------------
   data: Array<any> = [];
   postsDataSource = new MatTableDataSource<Post>();
   photosDataSource = new MatTableDataSource<Photo>();
   usersDataSource = new MatTableDataSource<User>();
 
-  postsDisplayedColumns: string[] = ['title', 'body'];
+  postsDisplayedColumns: string[] = ['title', 'body', 'actions'];
   photosDisplayedColumns: string[] = ['title', 'url', 'thumbnailUrl', 'actions'];
   usersDisplayedColumns: string[] = ['name', 'username', 'email', 'phone', 'website'];
 
@@ -41,6 +43,18 @@ export class AppComponent implements OnInit{
     this.getPostsFromAPI();
     this.getPhotosFromAPI();
     this.getUsersFromAPI();
+  }
+
+  createPost(data: any){
+    this.JSONPlaceHolder.createPost(data.title, data.body);
+  }
+
+  editPost(id: string, data: any){    
+    this.JSONPlaceHolder.editPost(id, data.title, data.body);
+  }
+
+  deletePost(id: string) {
+    this.JSONPlaceHolder.deletePost(id);
   }
 
   getPostsFromAPI(){

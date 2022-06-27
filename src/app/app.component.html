@@ -1,10 +1,24 @@
-<div class="selector-buttons">
-  <button mat-raised-button color="primary" (click)="changeSelected('posts')">Mostrar Posts</button>
-  <button mat-raised-button color="primary" (click)="changeSelected('photos')">Mostrar Fotos</button>
-  <button mat-raised-button color="primary" (click)="changeSelected('users')">Mostrar Usuarios</button>
+<div style = "display: flex; flex-direction: row; width: 100%; justify-content: space-around;">
+  <div class="selector-buttons">
+    <button mat-raised-button color="primary" (click)="changeSelected('posts')">Show Posts</button>
+    <button mat-raised-button color="primary" (click)="changeSelected('photos')">Show Photos</button>
+    <button mat-raised-button color="primary" (click)="changeSelected('users')">Show Users</button>
+  </div>
+  
+  <form class="form-container" #post="ngForm" (ngSubmit)="createPost(post.value)">
+    <div class="form-inputs">
+      <mat-form-field appearance="fill">
+        <mat-label>Title: </mat-label>
+        <input matInput type="text" name="title" ngModel>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Body: </mat-label>
+        <textarea matInput type="text" name="body" ngModel></textarea>
+      </mat-form-field>
+    </div>
+    <button type="submit" value="submit" mat-raised-button color="primary" >Create Post</button>
+  </form>
 </div>
-
-<button mat-raised-button color="" (click)="openDialog()">Pick one</button>
 
 <div *ngIf="isPosts" class="mat-elevation-z8">
   <table class="table-container" mat-table [dataSource]="postsDataSource">
@@ -22,7 +36,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td class="buttons-container" mat-cell *matCellDef="let element"> 
-        <button mat-raised-button color="accent" >Edit</button>
+        <button mat-raised-button color="accent" (click)="editPost(element.id, post.value)">Edit</button>
         <button mat-raised-button color="warn" (click)="deletePost(element.id)">Delete</button>
       </td>
     </ng-container>
@@ -37,7 +51,7 @@
 </div>
 
 <div *ngIf="isPhotos" class="mat-elevation-z8">
-  <table class="table-container" mat-table [dataSource]="photosDataSource">
+  <table  class="table-container" mat-table [dataSource]="photosDataSource">
 
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef> Title </th>
